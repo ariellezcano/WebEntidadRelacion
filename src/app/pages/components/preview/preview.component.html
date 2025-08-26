@@ -1,0 +1,16 @@
+<!-- Componentes hijos -->
+<app-entidades (entidadesChange)="actualizarEntidades($event)"></app-entidades>
+<app-relaciones [entidades]="entidades" (relacionesChange)="actualizarRelaciones($event)"></app-relaciones>
+
+<!-- Botones para generar y ejecutar SQL -->
+<button (click)="generarSql()">Generar SQL</button>
+<button (click)="ejecutarSql()">Ejecutar SQL</button>
+
+<!-- SQL generado -->
+<h3>SQL Generado</h3>
+<pre>{{ sqlScript }}</pre>
+
+<!-- Diagrama ER usando Mermaid -->
+<h3>Diagrama ER</h3>
+<!-- Usamos id para renderizar explícitamente -->
+<div class="mermaid" [innerHTML]="mermaidCode"></div>

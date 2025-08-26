@@ -1,0 +1,28 @@
+<h3>Entidades</h3>
+
+<!-- Agregar nueva entidad -->
+<input type="text" [(ngModel)]="nuevaEntidad.nombre" placeholder="Nombre de la entidad">
+<button (click)="agregarEntidad()">Agregar Entidad</button>
+
+<!-- Lista de entidades y sus atributos -->
+<div *ngFor="let entidad of entidades">
+  <h4>{{ entidad.nombre }}</h4>
+  <ul>
+    <li *ngFor="let attr of entidad.atributos">
+      {{ attr.nombre }} ({{ attr.tipo }})
+      <span *ngIf="attr.clavePrimaria">[PK]</span>
+      <span *ngIf="attr.claveForanea">[FK]</span>
+      <span *ngIf="!attr.nulo">[NOT NULL]</span>
+    </li>
+  </ul>
+
+  <!-- Agregar atributo a esta entidad -->
+  <input type="text" [(ngModel)]="nuevoAtributo.nombre" placeholder="Nombre atributo">
+  <select [(ngModel)]="nuevoAtributo.tipo">
+    <option *ngFor="let tipo of tiposDatos" [value]="tipo">{{ tipo }}</option>
+  </select>
+  <label><input type="checkbox" [(ngModel)]="nuevoAtributo.clavePrimaria"> PK</label>
+  <label><input type="checkbox" [(ngModel)]="nuevoAtributo.claveForanea"> FK</label>
+  <label><input type="checkbox" [(ngModel)]="nuevoAtributo.nulo"> Nulo</label>
+  <button (click)="agregarAtributo(entidad)">Agregar Atributo</button>
+</div>

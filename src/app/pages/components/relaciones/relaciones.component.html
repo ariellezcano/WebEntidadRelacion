@@ -1,0 +1,28 @@
+<h3>Relaciones</h3>
+
+<!-- Seleccionar origen y destino -->
+<select [(ngModel)]="nuevaRelacion.origen">
+  <option value="">Seleccionar entidad origen</option>
+  <option *ngFor="let e of entidades" [value]="e.nombre">{{ e.nombre }}</option>
+</select>
+
+<select [(ngModel)]="nuevaRelacion.destino">
+  <option value="">Seleccionar entidad destino</option>
+  <option *ngFor="let e of entidades" [value]="e.nombre">{{ e.nombre }}</option>
+</select>
+
+<!-- Cardinalidad y etiqueta -->
+<select [(ngModel)]="nuevaRelacion.cardinalidad">
+  <option value="||--||">1 a 1</option>
+  <option value="||--o{">1 a muchos</option>
+  <option value="|o--o|">muchos a muchos</option>
+</select>
+
+<input type="text" [(ngModel)]="nuevaRelacion.etiqueta" placeholder="Etiqueta de relación">
+
+<button (click)="agregarRelacion()">Agregar Relación</button>
+
+<!-- Mostrar relaciones existentes -->
+<div *ngFor="let rel of relaciones">
+  {{ rel.origen }} {{ rel.cardinalidad }} {{ rel.destino }} : {{ rel.etiqueta }}
+</div>
