@@ -15,7 +15,6 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
   relaciones: Relacion[] = [];
   sqlScript: string = '';
   mermaidCode: string = '';
-
   private mermaidInitialized = false;
 
   constructor(
@@ -24,11 +23,20 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit() {
-    // Inicializar Mermaid
-    mermaid.initialize({ startOnLoad: false, theme: 'default' });
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#e8e8ff',
+        primaryBorderColor: '#4a90e2',
+        primaryTextColor: '#1a1a1a',
+        lineColor: '#4a90e2',
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '14px'
+      }
+    });
     this.mermaidInitialized = true;
 
-    // Suscribirse al estado global
     this.stateService.entidades$.subscribe(e => {
       this.entidades = e;
       this.generarMermaid();
@@ -41,7 +49,6 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     if (this.mermaidInitialized && this.mermaidCode) {
-      // Renderiza todos los div.mermaid en la página
       mermaid.contentLoaded();
     }
   }
@@ -79,6 +86,7 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
       mermaidText += `  }\n`;
     }
     for (let rel of this.relaciones) {
+      // Para el estilo que querés, usamos cardinalidad tipo ||--o{ o similar
       mermaidText += `  ${rel.origen} ${rel.cardinalidad} ${rel.destino} : ${rel.etiqueta}\n`;
     }
     this.mermaidCode = mermaidText;

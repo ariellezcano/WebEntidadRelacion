@@ -11,6 +11,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "useDefineForClassFields": false, // Cambiar o añadir esta línea
     "skipLibCheck": true,
     "declaration": false,
     "downlevelIteration": true,
