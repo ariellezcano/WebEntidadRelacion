@@ -3,6 +3,7 @@ import { Entidad, Relacion } from 'src/app/models/index.models';
 import { DiagramService } from 'src/app/services/diagram.service';
 import { StateService } from 'src/app/services/state.service';
 import mermaid from 'mermaid';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-preview',
@@ -14,28 +15,21 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
   entidades: Entidad[] = [];
   relaciones: Relacion[] = [];
   sqlScript: string = '';
-  mermaidCode: string = '';
+  //mermaidCode: string = '';
+  mermaidCode: SafeHtml = ''; // 👈 ahora es SafeHtml
   private mermaidInitialized = false;
 
   constructor(
     private diagramService: DiagramService,
-    private stateService: StateService
+    private stateService: StateService,
+    private sanitizer: DomSanitizer // 👈 inyectamos sanitizer
   ) {}
 
   ngOnInit() {
     mermaid.initialize({
       startOnLoad: false,
-      theme: 'base',
-      themeVariables: {
-        primaryColor: '#e8e8ff',
-        primaryBorderColor: '#4a90e2',
-        primaryTextColor: '#1a1a1a',
-        lineColor: '#4a90e2',
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '14px'
-      }
+      theme: 'base'
     });
-    this.mermaidInitialized = true;
 
     this.stateService.entidades$.subscribe(e => {
       this.entidades = e;
@@ -49,7 +43,8 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     if (this.mermaidInitialized && this.mermaidCode) {
-      mermaid.contentLoaded();
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+      this.mermaidInitialized = false;
     }
   }
 
@@ -78,6 +73,7 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
 
   generarMermaid() {
     let mermaidText = 'erDiagram\n';
+
     for (let entidad of this.entidades) {
       mermaidText += `  ${entidad.nombre} {\n`;
       for (let attr of entidad.atributos) {
@@ -85,10 +81,14 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
       }
       mermaidText += `  }\n`;
     }
+
     for (let rel of this.relaciones) {
-      // Para el estilo que querés, usamos cardinalidad tipo ||--o{ o similar
       mermaidText += `  ${rel.origen} ${rel.cardinalidad} ${rel.destino} : ${rel.etiqueta}\n`;
     }
-    this.mermaidCode = mermaidText;
+
+    // 👇 Sanitizamos el código para Angular
+    this.mermaidCode = this.sanitizer.bypassSecurityTrustHtml(mermaidText);
+    this.mermaidInitialized = true;
   }
+
 }

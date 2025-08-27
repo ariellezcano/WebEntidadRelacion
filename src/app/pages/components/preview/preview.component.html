@@ -15,5 +15,6 @@
 <!-- Diagrama ER -->
 <h3>Diagrama ER</h3>
 <div class="diagram-container">
-  <div class="mermaid">{{ mermaidCode }}</div>
+  <!-- IMPORTANTE: usar innerHTML para que Mermaid reemplace el contenido -->
+  <div class="mermaid" [innerHTML]="mermaidCode"></div>
 </div>

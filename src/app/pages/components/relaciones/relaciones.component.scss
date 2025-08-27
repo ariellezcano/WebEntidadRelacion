@@ -1,0 +1,72 @@
+.titulo-relaciones {
+    color: #2c3e50;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 10px;
+  }
+  
+  /* Contenedor de nuevo registro */
+  .nueva-relacion {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+  }
+  
+  .nueva-relacion select,
+  .nueva-relacion input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-width: 150px;
+  }
+  
+  .nueva-relacion button {
+    padding: 5px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2980b9;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .nueva-relacion button:hover {
+    background-color: #1c5980;
+  }
+  
+  /* Lista de relaciones */
+  .relaciones-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .relacion-card {
+    background-color: #f9f9f9;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    padding: 8px 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  .relacion-card .origen {
+    font-weight: bold;
+    color: #34495e;
+  }
+  
+  .relacion-card .cardinalidad {
+    color: #e67e22;
+  }
+  
+  .relacion-card .destino {
+    font-weight: bold;
+    color: #34495e;
+  }
+  
+  .relacion-card .etiqueta {
+    font-style: italic;
+    color: #7f8c8d;
+  }
+  

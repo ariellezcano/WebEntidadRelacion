@@ -17,6 +17,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+      "@braintree/sanitize-url",
+      "dayjs",
+      "dompurify",
+      "debug"
+    ],
             "outputPath": "dist/generador-er",
             "index": "src/index.html",
             "main": "src/main.ts",

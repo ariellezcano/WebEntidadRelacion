@@ -1,28 +1,32 @@
-<h3>Entidades</h3>
+<h3 class="titulo-entidades">Entidades</h3>
 
 <!-- Agregar nueva entidad -->
-<input type="text" [(ngModel)]="nuevaEntidad.nombre" placeholder="Nombre de la entidad">
-<button (click)="agregarEntidad()">Agregar Entidad</button>
+<div class="nueva-entidad">
+  <input type="text" [(ngModel)]="nuevaEntidad.nombre" placeholder="Nombre de la entidad">
+  <button (click)="agregarEntidad()">Agregar Entidad</button>
+</div>
 
 <!-- Lista de entidades y sus atributos -->
-<div *ngFor="let entidad of entidades">
-  <h4>{{ entidad.nombre }}</h4>
-  <ul>
+<div *ngFor="let entidad of entidades" class="entidad-card">
+  <h4 class="nombre-entidad">{{ entidad.nombre }}</h4>
+  <ul class="atributos-lista">
     <li *ngFor="let attr of entidad.atributos">
       {{ attr.nombre }} ({{ attr.tipo }})
-      <span *ngIf="attr.clavePrimaria">[PK]</span>
-      <span *ngIf="attr.claveForanea">[FK]</span>
-      <span *ngIf="!attr.nulo">[NOT NULL]</span>
+      <span *ngIf="attr.clavePrimaria" class="tag pk">PK</span>
+      <span *ngIf="attr.claveForanea" class="tag fk">FK</span>
+      <span *ngIf="!attr.nulo" class="tag not-null">NOT NULL</span>
     </li>
   </ul>
 
   <!-- Agregar atributo a esta entidad -->
-  <input type="text" [(ngModel)]="nuevoAtributo.nombre" placeholder="Nombre atributo">
-  <select [(ngModel)]="nuevoAtributo.tipo">
-    <option *ngFor="let tipo of tiposDatos" [value]="tipo">{{ tipo }}</option>
-  </select>
-  <label><input type="checkbox" [(ngModel)]="nuevoAtributo.clavePrimaria"> PK</label>
-  <label><input type="checkbox" [(ngModel)]="nuevoAtributo.claveForanea"> FK</label>
-  <label><input type="checkbox" [(ngModel)]="nuevoAtributo.nulo"> Nulo</label>
-  <button (click)="agregarAtributo(entidad)">Agregar Atributo</button>
+  <div class="nuevo-atributo">
+    <input type="text" [(ngModel)]="nuevoAtributo.nombre" placeholder="Nombre atributo">
+    <select [(ngModel)]="nuevoAtributo.tipo">
+      <option *ngFor="let tipo of tiposDatos" [value]="tipo">{{ tipo }}</option>
+    </select>
+    <label><input type="checkbox" [(ngModel)]="nuevoAtributo.clavePrimaria"> PK</label>
+    <label><input type="checkbox" [(ngModel)]="nuevoAtributo.claveForanea"> FK</label>
+    <label><input type="checkbox" [(ngModel)]="nuevoAtributo.nulo"> Nulo</label>
+    <button (click)="agregarAtributo(entidad)">Agregar Atributo</button>
+  </div>
 </div>

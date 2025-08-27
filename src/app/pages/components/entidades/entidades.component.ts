@@ -3,7 +3,8 @@ import { Atributo, Entidad } from 'src/app/models/index.models';
 
 @Component({
   selector: 'app-entidades',
-  templateUrl: './entidades.component.html'
+  templateUrl: './entidades.component.html',
+  styleUrls: ['./entidades.component.scss']
 })
 export class EntidadesComponent {
   entidades: Entidad[] = [];

@@ -3,7 +3,8 @@ import { Entidad, Relacion } from 'src/app/models/index.models';
 
 @Component({
   selector: 'app-relaciones',
-  templateUrl: './relaciones.component.html'
+  templateUrl: './relaciones.component.html',
+  styleUrls: ['./relaciones.component.scss']
 })
 export class RelacionesComponent {
   @Input() entidades: Entidad[] = [];            // Recibe entidades del componente padre
