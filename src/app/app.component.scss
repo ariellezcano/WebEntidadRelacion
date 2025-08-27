@@ -1,0 +1,40 @@
+/* Navbar */
+.navbar {
+  background-color: #003399; /* azul Francia */
+  padding: 20px 25px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-content {
+  text-align: center;
+}
+
+.navbar-title {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+  display: block;
+}
+
+.navbar-subtitle {
+  color: #f0f0f0;
+  font-size: 14px;
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Contenedor del router-outlet */
+.content-container {
+  max-width: 1200px; /* ancho máximo */
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f5f5f5; /* fondo claro */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}

@@ -55,4 +55,16 @@ h3.titulo-entidades {
   button:hover {
     background-color: #1c5980;
   }
+
+  .btn-eliminar {
+  background: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.btn-eliminar:hover {
+  transform: scale(1.2);
+}
   

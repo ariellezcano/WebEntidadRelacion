@@ -1,7 +1,10 @@
-<nav style="margin-bottom: 20px;">
-  <a routerLink="/" routerLinkActive="active">Preview</a> |
-  <a routerLink="/entidades" routerLinkActive="active">Entidades</a> |
-  <a routerLink="/relaciones" routerLinkActive="active">Relaciones</a>
+<nav class="navbar">
+  <div class="navbar-content">
+    <span class="navbar-title">Policía del Chaco</span>
+    <span class="navbar-subtitle">Herramienta de generación de scripts y diagramas ER</span>
+  </div>
 </nav>
 
-<router-outlet></router-outlet>
+<div class="content-container">
+  <router-outlet></router-outlet>
+</div>

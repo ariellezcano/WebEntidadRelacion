@@ -1,163 +1,242 @@
-:host {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem;
-}
+// :host {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 1.5rem;
+//   padding: 1rem;
+// }
 
-.actions {
-  display: flex;
-  gap: 1rem;
+// .actions {
+//   display: flex;
+//   gap: 1rem;
 
-  button {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 8px;
-    background: #4a90e2;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background 0.2s;
+//   button {
+//     padding: 0.6rem 1.2rem;
+//     border: none;
+//     border-radius: 8px;
+//     background: #4a90e2;
+//     color: white;
+//     cursor: pointer;
+//     font-size: 14px;
+//     font-weight: 500;
+//     transition: background 0.2s;
 
-    &:hover {
-      background: #357abd;
-    }
-  }
-}
+//     &:hover {
+//       background: #357abd;
+//     }
+//   }
+// }
 
-.diagram-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
-  padding: 1rem;
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+// .diagram-container {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   overflow: auto;
+//   padding: 1rem;
+//   background: #fafafa;
+//   border: 1px solid #ddd;
+//   border-radius: 10px;
+//   box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
 
-  .mermaid {
-    max-width: 100%;
-    svg {
-      width: auto !important;
-      height: auto !important;
-    }
-  }
+//   .mermaid {
+//     max-width: 100%;
+//     svg {
+//       width: auto !important;
+//       height: auto !important;
+//     }
+//   }
+// }
+
+// pre {
+//   background: #272822;
+//   color: #f8f8f2;
+//   padding: 1rem;
+//   border-radius: 6px;
+//   overflow-x: auto;
+// }
+
+// .modal {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0,0,0,0.6);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   z-index: 9999;
+// }
+
+// .modal-content {
+//   background: #fff;
+//   padding: 20px;
+//   border-radius: 12px;
+//   width: 80%;
+//   max-height: 90%;
+//   overflow-y: auto;
+//   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+// }
+
+// .close {
+//   float: right;
+//   font-size: 24px;
+//   cursor: pointer;
+// }
+
+
+// /* Botón */
+// .btn-diagrama {
+//   padding: 8px 15px;
+//   border: none;
+//   border-radius: 6px;
+//   background-color: #2980b9;
+//   color: white;
+//   cursor: pointer;
+//   font-size: 14px;
+// }
+
+// .btn-diagrama:hover {
+//   background-color: #1c5980;
+// }
+
+// /* Fondo del modal */
+// .modal {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgba(0,0,0,0.6); /* fondo semi-transparente */
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   z-index: 1000;
+// }
+
+// /* Contenido del modal */
+// .modal-content {
+//   background: #fff;
+//   border-radius: 10px;
+//   padding: 20px;
+//   width: 90%;
+//   max-width: 900px;
+//   max-height: 90%;
+//   overflow: auto;
+//   position: relative;
+//   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+//   animation: fadeIn 0.3s ease-in-out;
+// }
+
+// /* Botón de cierre */
+// .close {
+//   position: absolute;
+//   top: 10px;
+//   right: 15px;
+//   font-size: 24px;
+//   font-weight: bold;
+//   color: #555;
+//   cursor: pointer;
+// }
+
+// .close:hover {
+//   color: #e74c3c;
+// }
+
+// /* Animación */
+// @keyframes fadeIn {
+//   from { opacity: 0; transform: scale(0.9); }
+//   to { opacity: 1; transform: scale(1); }
+// }
+
+// /* Área del diagrama */
+// .mermaid {
+//   border: 1px solid #ccc;
+//   border-radius: 8px;
+//   background: #fafafa;
+//   padding: 15px;
+//   margin-top: 15px;
+//   overflow-x: auto;
+// }
+
+// .btn-diagrama {
+//   background: linear-gradient(135deg, #2980b9, #3498db);
+//   color: #fff;
+//   font-size: 15px;
+//   font-weight: 600;
+//   padding: 10px 18px;
+//   border: none;
+//   border-radius: 8px;
+//   cursor: pointer;
+//   transition: all 0.2s ease-in-out;
+//   box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+// }
+
+// .btn-diagrama:hover {
+//   background: linear-gradient(135deg, #1c5980, #2471a3);
+//   transform: translateY(-2px);
+//   box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+// }
+
+// .btn-diagrama:active {
+//   transform: translateY(0);
+//   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+// }
+
+/* ----- Layout general ----- */
+h3 {
+  color: #2c3e50;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 15px 0 8px 0;
 }
 
 pre {
-  background: #272822;
+  background: #2d2d2d;
   color: #f8f8f2;
-  padding: 1rem;
+  padding: 12px;
   border-radius: 6px;
-  overflow-x: auto;
+  font-size: 14px;
+  max-height: 250px;
+  overflow: auto;
 }
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
+/* ----- Acciones (botones principales) ----- */
+.actions {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+  gap: 12px;
+  margin: 15px 0;
 }
 
-.modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  width: 80%;
-  max-height: 90%;
-  overflow-y: auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.close {
-  float: right;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-
-/* Botón */
-.btn-diagrama {
+.actions button {
   padding: 8px 15px;
   border: none;
   border-radius: 6px;
-  background-color: #2980b9;
+  background-color: #27ae60;
   color: white;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 14px;
+  transition: all 0.2s ease-in-out;
 }
 
-.btn-diagrama:hover {
-  background-color: #1c5980;
+.actions button:hover {
+  background-color: #1e8449;
+  transform: translateY(-2px);
 }
 
-/* Fondo del modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.6); /* fondo semi-transparente */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+.actions button:active {
+  transform: translateY(0);
 }
 
-/* Contenido del modal */
-.modal-content {
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  width: 90%;
-  max-width: 900px;
-  max-height: 90%;
-  overflow: auto;
-  position: relative;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Botón de cierre */
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #555;
-  cursor: pointer;
-}
-
-.close:hover {
-  color: #e74c3c;
-}
-
-/* Animación */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* Área del diagrama */
-.mermaid {
+/* ----- Contenedor del diagrama en página ----- */
+.diagram-container {
   border: 1px solid #ccc;
-  border-radius: 8px;
   background: #fafafa;
+  border-radius: 8px;
   padding: 15px;
-  margin-top: 15px;
+  margin: 10px 0 20px 0;
   overflow-x: auto;
 }
 
+/* ----- Botón de abrir modal ----- */
 .btn-diagrama {
   background: linear-gradient(135deg, #2980b9, #3498db);
   color: #fff;
@@ -181,3 +260,91 @@ pre {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+/* ----- Modal ----- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90%;
+  overflow: auto;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Botón cerrar modal */
+.close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #e74c3c;
+}
+
+/* Animación modal */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ----- Botones dentro del modal ----- */
+.modal-content button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-content button:first-of-type {
+  background-color: #c0392b; /* PDF */
+  color: white;
+}
+
+.modal-content button:first-of-type:hover {
+  background-color: #922b21;
+}
+
+.modal-content button:last-of-type {
+  background-color: #16a085; /* PNG */
+  color: white;
+}
+
+.modal-content button:last-of-type:hover {
+  background-color: #0e6655;
+}
+
+/* Área del diagrama dentro del modal */
+#diagram-container {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fafafa;
+  padding: 15px;
+  margin-top: 15px;
+  overflow-x: auto;
+}
+
