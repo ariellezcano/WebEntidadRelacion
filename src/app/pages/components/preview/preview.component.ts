@@ -19,6 +19,9 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
   mermaidCode: SafeHtml = ''; // 👈 ahora es SafeHtml
   private mermaidInitialized = false;
 
+  // 👇 Estado del modal
+  mostrarModal: boolean = false;
+
   constructor(
     private diagramService: DiagramService,
     private stateService: StateService,
@@ -28,7 +31,9 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     mermaid.initialize({
       startOnLoad: false,
-      theme: 'base'
+      //theme: 'base'
+      theme: 'neutral'
+
     });
 
     this.stateService.entidades$.subscribe(e => {
@@ -71,6 +76,15 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
       });
   }
 
+  abrirModal() {
+    this.mostrarModal = true;
+    this.mermaidInitialized = true; // fuerza render
+  }
+
+  cerrarModal() {
+    this.mostrarModal = false;
+  }
+
   generarMermaid() {
     let mermaidText = 'erDiagram\n';
 
@@ -90,5 +104,53 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
     this.mermaidCode = this.sanitizer.bypassSecurityTrustHtml(mermaidText);
     this.mermaidInitialized = true;
   }
+
+exportarDrawio() {
+  // Estructura mínima de un archivo .drawio (XML con mxGraphModel)
+  let xml = `
+  <mxfile host="app.diagrams.net">
+    <diagram name="ER Diagram">
+      <mxGraphModel>
+        <root>
+          <mxCell id="0"/>
+          <mxCell id="1" parent="0"/>
+  `;
+
+  // Agregar entidades como rectángulos
+  let idCounter = 2;
+  for (let entidad of this.entidades) {
+    xml += `
+      <mxCell id="${idCounter}" value="${entidad.nombre}" style="shape=rectangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxGeometry x="${idCounter * 50}" y="50" width="120" height="60" as="geometry"/>
+      </mxCell>
+    `;
+    idCounter++;
+  }
+
+  // Agregar relaciones como elipses
+  for (let rel of this.relaciones) {
+    xml += `
+      <mxCell id="${idCounter}" value="${rel.etiqueta}" style="shape=ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxGeometry x="${idCounter * 50}" y="200" width="100" height="40" as="geometry"/>
+      </mxCell>
+    `;
+    idCounter++;
+  }
+
+  xml += `
+        </root>
+      </mxGraphModel>
+    </diagram>
+  </mxfile>
+  `;
+
+  // Descargar archivo
+  const blob = new Blob([xml], { type: 'application/xml' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'er-diagram.drawio';
+  link.click();
+}
+
 
 }

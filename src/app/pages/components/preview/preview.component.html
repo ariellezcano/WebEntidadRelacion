@@ -18,3 +18,18 @@
   <!-- IMPORTANTE: usar innerHTML para que Mermaid reemplace el contenido -->
   <div class="mermaid" [innerHTML]="mermaidCode"></div>
 </div>
+
+
+<!-- Botón para ver el diagrama en un modal -->
+<button class="btn-diagrama" (click)="abrirModal()">Ver diagrama ER</button>
+
+<!-- Modal -->
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarModal()">&times;</span>
+    <h3>Diagrama ER</h3>
+    <!-- Botón para exportar -->
+    <button (click)="exportarDrawio()">Descargar para draw.io</button>
+    <div class="mermaid" [innerHTML]="mermaidCode"></div>
+  </div>
+</div>
