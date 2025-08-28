@@ -26,10 +26,13 @@
 
 <!-- Mostrar relaciones existentes -->
 <div class="relaciones-lista">
-  <div *ngFor="let rel of relaciones" class="relacion-card">
+  <div *ngFor="let rel of relaciones; let i = index" class="relacion-card">
     <span class="origen">{{ rel.origen }}</span>
     <span class="cardinalidad">{{ rel.cardinalidad }}</span>
     <span class="destino">{{ rel.destino }}</span>
     <span class="etiqueta">: {{ rel.etiqueta }}</span>
+
+    <!-- Botón eliminar -->
+    <button class="btn-eliminar" (click)="eliminarRelacion(i)">❌</button>
   </div>
 </div>

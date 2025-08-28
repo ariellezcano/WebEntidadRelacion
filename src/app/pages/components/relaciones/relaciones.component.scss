@@ -70,3 +70,28 @@
     color: #7f8c8d;
   }
   
+
+  .relacion-card {
+  display: flex;
+  align-items: center;
+  //justify-content: space-between;
+  background: #f4f4f4;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+.btn-eliminar {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-eliminar:hover {
+  color: #c0392b;
+  transform: scale(1.2);
+}

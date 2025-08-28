@@ -8,7 +8,12 @@
 
 <!-- Lista de entidades y sus atributos -->
 <div *ngFor="let entidad of entidades" class="entidad-card">
-  <h4 class="nombre-entidad">{{ entidad.nombre }}</h4>
+  <h4 class="nombre-entidad">
+    <em><b><u> {{ entidad.nombre }}</u></b></em>
+    <!-- Botón para eliminar ENTIDAD -->
+    <button class="btn-eliminar-entidad" (click)="eliminarEntidad(entidad)">❌</button>
+  </h4>
+
   <ul class="atributos-lista">
     <li *ngFor="let attr of entidad.atributos">
       {{ attr.nombre }} ({{ attr.tipo }})
@@ -16,7 +21,7 @@
       <span *ngIf="attr.claveForanea" class="tag fk">FK</span>
       <span *ngIf="!attr.nulo" class="tag not-null">NOT NULL</span>
 
-      <!-- Botón para eliminar atributo -->
+      <!-- Botón para eliminar ATRIBUTO -->
       <button class="btn-eliminar" (click)="eliminarAtributo(entidad, attr)">❌</button>
     </li>
   </ul>
@@ -33,4 +38,3 @@
     <button (click)="agregarAtributo(entidad)">Agregar Atributo</button>
   </div>
 </div>
-

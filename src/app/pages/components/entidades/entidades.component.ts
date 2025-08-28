@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Atributo, Entidad } from 'src/app/models/index.models';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-entidades',
@@ -18,7 +19,6 @@ export class EntidadesComponent {
   };
 
   @Output() entidadesChange = new EventEmitter<Entidad[]>();
-
 
   // Tipos de datos más utilizados en SQL Server
   tiposDatos: string[] = [
@@ -49,7 +49,6 @@ export class EntidadesComponent {
     'BIT',
   ];
 
-
   agregarEntidad() {
     if (!this.nuevaEntidad.nombre.trim()) return;
     this.entidades.push({ ...this.nuevaEntidad, atributos: [] });
@@ -70,7 +69,49 @@ export class EntidadesComponent {
     this.entidadesChange.emit(this.entidades);
   }
 
+  // eliminarAtributo(entidad: any, attr: any) {
+  //   entidad.atributos = entidad.atributos.filter((a: any) => a !== attr);
+  // }
+
+  // eliminarEntidad(entidad: any) {
+  //   this.entidades = this.entidades.filter((e: any) => e !== entidad);
+  // }
+
+  eliminarEntidad(entidad: any) {
+    Swal.fire({
+      title: '¿Eliminar entidad?',
+      text: `Se eliminará la entidad "${entidad.nombre}" y todos sus atributos.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.entidades = this.entidades.filter((e: any) => e !== entidad);
+        this.entidadesChange.emit(this.entidades);
+        Swal.fire('Eliminada', 'La entidad ha sido eliminada.', 'success');
+      }
+    });
+  }
+
   eliminarAtributo(entidad: any, attr: any) {
-    entidad.atributos = entidad.atributos.filter((a: any) => a !== attr);
+    Swal.fire({
+      title: '¿Eliminar atributo?',
+      text: `Se eliminará el atributo "${attr.nombre}" de la entidad "${entidad.nombre}".`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        entidad.atributos = entidad.atributos.filter((a: any) => a !== attr);
+        this.entidadesChange.emit(this.entidades); // 🔹 Emitir cambios al padre
+        Swal.fire('Eliminado', 'El atributo ha sido eliminado.', 'success');
+      }
+    });
   }
 }

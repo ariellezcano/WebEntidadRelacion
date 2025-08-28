@@ -63,15 +63,32 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
     this.mostrarModal = false;
   }
 
-   actualizarEntidades(entidades: Entidad[]) {
-    this.entidades = entidades;
-    this.generarMermaid();
-  }
+  actualizarEntidades(entidades: Entidad[]) {
+  this.entidades = entidades;
+  this.actualizarDiagrama();
+}
 
-  actualizarRelaciones(relaciones: Relacion[]) {
-    this.relaciones = relaciones;
-    this.generarMermaid();
-  }
+actualizarRelaciones(relaciones: Relacion[]) {
+  this.relaciones = relaciones;
+  this.actualizarDiagrama();
+}
+
+
+  // 👉 Método que construye el código Mermaid y vuelve a renderizar
+actualizarDiagrama() {
+  this.mermaidCode = this.generarMermaid();
+
+  setTimeout(() => {
+    // 🔹 Buscar todos los contenedores
+    const mermaidElems = document.querySelectorAll('.mermaid');
+
+    // 🔹 Limpiar su contenido (importante para que no quede el render anterior)
+    mermaidElems.forEach(el => el.innerHTML = this.mermaidCode);
+
+    // 🔹 Volver a renderizar
+    mermaid.init(undefined, mermaidElems);
+  }, 50);
+}
 
   generarSql() {
     this.diagramService
@@ -88,23 +105,41 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
       });
   }
 
-  generarMermaid() {
-    let mermaidText = 'erDiagram\n';
-    for (let entidad of this.entidades) {
-      mermaidText += `  ${entidad.nombre} {\n`;
-      for (let attr of entidad.atributos) {
-        mermaidText += `    ${attr.tipo} ${attr.nombre}\n`;
-      }
-      mermaidText += `  }\n`;
-    }
+  // generarMermaid() {
+  //   let mermaidText = 'erDiagram\n';
+  //   for (let entidad of this.entidades) {
+  //     mermaidText += `  ${entidad.nombre} {\n`;
+  //     for (let attr of entidad.atributos) {
+  //       mermaidText += `    ${attr.tipo} ${attr.nombre}\n`;
+  //     }
+  //     mermaidText += `  }\n`;
+  //   }
 
-    for (let rel of this.relaciones) {
-      mermaidText += `  ${rel.origen} ${rel.cardinalidad} ${rel.destino} : ${rel.etiqueta}\n`;
-    }
+  //   for (let rel of this.relaciones) {
+  //     mermaidText += `  ${rel.origen} ${rel.cardinalidad} ${rel.destino} : ${rel.etiqueta}\n`;
+  //   }
 
-    this.mermaidCode = mermaidText;
-    this.mermaidHtml = this.sanitizer.bypassSecurityTrustHtml(mermaidText);
+  //   this.mermaidCode = mermaidText;
+  //   this.mermaidHtml = this.sanitizer.bypassSecurityTrustHtml(mermaidText);
+  // }
+
+  generarMermaid(): string {
+  let mermaidText = 'erDiagram\n';
+  for (let entidad of this.entidades) {
+    mermaidText += `  ${entidad.nombre} {\n`;
+    for (let attr of entidad.atributos) {
+      mermaidText += `    ${attr.tipo} ${attr.nombre}\n`;
+    }
+    mermaidText += `  }\n`;
   }
+
+  for (let rel of this.relaciones) {
+    mermaidText += `  ${rel.origen} ${rel.cardinalidad} ${rel.destino} : ${rel.etiqueta}\n`;
+  }
+
+  this.mermaidHtml = this.sanitizer.bypassSecurityTrustHtml(mermaidText);
+  return mermaidText;
+}
 
   exportarPdf() {
     const element = document.getElementById('diagram-container');
