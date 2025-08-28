@@ -64,31 +64,30 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
   }
 
   actualizarEntidades(entidades: Entidad[]) {
-  this.entidades = entidades;
-  this.actualizarDiagrama();
-}
+    this.entidades = entidades;
+    this.actualizarDiagrama();
+  }
 
-actualizarRelaciones(relaciones: Relacion[]) {
-  this.relaciones = relaciones;
-  this.actualizarDiagrama();
-}
-
+  actualizarRelaciones(relaciones: Relacion[]) {
+    this.relaciones = relaciones;
+    this.actualizarDiagrama();
+  }
 
   // 👉 Método que construye el código Mermaid y vuelve a renderizar
-actualizarDiagrama() {
-  this.mermaidCode = this.generarMermaid();
+  actualizarDiagrama() {
+    this.mermaidCode = this.generarMermaid();
 
-  setTimeout(() => {
-    // 🔹 Buscar todos los contenedores
-    const mermaidElems = document.querySelectorAll('.mermaid');
+    setTimeout(() => {
+      // 🔹 Buscar todos los contenedores
+      const mermaidElems = document.querySelectorAll('.mermaid');
 
-    // 🔹 Limpiar su contenido (importante para que no quede el render anterior)
-    mermaidElems.forEach(el => el.innerHTML = this.mermaidCode);
+      // 🔹 Limpiar su contenido (importante para que no quede el render anterior)
+      mermaidElems.forEach((el) => (el.innerHTML = this.mermaidCode));
 
-    // 🔹 Volver a renderizar
-    mermaid.init(undefined, mermaidElems);
-  }, 50);
-}
+      // 🔹 Volver a renderizar
+      mermaid.init(undefined, mermaidElems);
+    }, 50);
+  }
 
   generarSql() {
     this.diagramService
@@ -104,6 +103,24 @@ actualizarDiagrama() {
         this.sqlScript = res.script;
       });
   }
+
+
+  exportarSql() {
+  if (!this.sqlScript) return;
+
+  // Crear un Blob con el contenido SQL
+  const blob = new Blob([this.sqlScript], { type: 'text/sql' });
+  const url = window.URL.createObjectURL(blob);
+
+  // Crear un enlace temporal y hacer click para descargar
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'script.sql';
+  link.click();
+
+  // Liberar el objeto URL
+  window.URL.revokeObjectURL(url);
+}
 
   // generarMermaid() {
   //   let mermaidText = 'erDiagram\n';
@@ -124,36 +141,36 @@ actualizarDiagrama() {
   // }
 
   generarMermaid(): string {
-  let mermaidText = 'erDiagram\n';
-  for (let entidad of this.entidades) {
-    mermaidText += `  ${entidad.nombre} {\n`;
-    for (let attr of entidad.atributos) {
-      mermaidText += `    ${attr.tipo} ${attr.nombre}\n`;
+    let mermaidText = 'erDiagram\n';
+    for (let entidad of this.entidades) {
+      mermaidText += `  ${entidad.nombre} {\n`;
+      for (let attr of entidad.atributos) {
+        mermaidText += `    ${attr.tipo} ${attr.nombre}\n`;
+      }
+      mermaidText += `  }\n`;
     }
-    mermaidText += `  }\n`;
-  }
 
-  for (let rel of this.relaciones) {
-    mermaidText += `  ${rel.origen} ${rel.cardinalidad} ${rel.destino} : ${rel.etiqueta}\n`;
-  }
+    for (let rel of this.relaciones) {
+      mermaidText += `  ${rel.origen} ${rel.cardinalidad} ${rel.destino} : ${rel.etiqueta}\n`;
+    }
 
-  this.mermaidHtml = this.sanitizer.bypassSecurityTrustHtml(mermaidText);
-  return mermaidText;
-}
+    this.mermaidHtml = this.sanitizer.bypassSecurityTrustHtml(mermaidText);
+    return mermaidText;
+  }
 
   exportarPdf() {
     const element = document.getElementById('diagram-container');
     if (!element) {
-      console.error("No se encontró el contenedor del diagrama");
+      console.error('No se encontró el contenedor del diagrama');
       return;
     }
 
-    html2canvas(element, { scale: 2 }).then(canvas => {
+    html2canvas(element, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
         orientation: 'landscape',
         unit: 'pt',
-        format: 'a4'
+        format: 'a4',
       });
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -168,7 +185,7 @@ actualizarDiagrama() {
     const element = document.getElementById('diagram-container');
     if (!element) return;
 
-    html2canvas(element, { scale: 2 }).then(canvas => {
+    html2canvas(element, { scale: 2 }).then((canvas) => {
       const link = document.createElement('a');
       link.download = 'er-diagram.png';
       link.href = canvas.toDataURL('image/png');
