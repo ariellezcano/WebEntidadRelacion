@@ -373,3 +373,14 @@ pre {
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+#diagram-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  width: 100%;
+  margin-top: 1rem; /* opcional, para separarlo un poco de los botones */
+}
+
+#diagram-container svg {
+  max-width: 100%;  /* evita que se desborde */
+  height: auto;
+}
