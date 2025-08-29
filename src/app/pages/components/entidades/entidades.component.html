@@ -32,8 +32,29 @@
     <select [(ngModel)]="nuevoAtributo.tipo">
       <option *ngFor="let tipo of tiposDatos" [value]="tipo">{{ tipo }}</option>
     </select>
-    <label><input type="checkbox" [(ngModel)]="nuevoAtributo.clavePrimaria"> PK</label>
-    <label><input type="checkbox" [(ngModel)]="nuevoAtributo.claveForanea"> FK</label>
+    
+    
+    <!-- <label><input type="checkbox" [(ngModel)]="nuevoAtributo.clavePrimaria" (change)="1"> PK</label>
+    <label><input type="checkbox" [(ngModel)]="nuevoAtributo.claveForanea" (change)="2"> FK</label> -->
+
+<label>
+  <input 
+    type="checkbox" 
+    [(ngModel)]="nuevoAtributo.clavePrimaria" 
+    (change)="chequeo(1)" 
+  /> 
+  PK
+</label>
+
+<label>
+  <input 
+    type="checkbox" 
+    [(ngModel)]="nuevoAtributo.claveForanea" 
+    (change)="chequeo(2)" 
+  /> 
+  FK
+</label>
+
     <label><input type="checkbox" [(ngModel)]="nuevoAtributo.nulo"> Nulo</label>
     <button (click)="agregarAtributo(entidad)">Agregar Atributo</button>
   </div>

@@ -115,6 +115,15 @@ export class EntidadesComponent {
     });
   }
 
-
-  
+  chequeo(item: number) {
+  if (item === 1) {
+    if (this.nuevoAtributo.clavePrimaria) {
+      this.nuevoAtributo.claveForanea = false; // si marco PK, desmarco FK
+    }
+  } else {
+    if (this.nuevoAtributo.claveForanea) {
+      this.nuevoAtributo.clavePrimaria = false; // si marco FK, desmarco PK
+    }
+  }
+}
 }
