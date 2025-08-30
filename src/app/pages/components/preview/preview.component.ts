@@ -6,6 +6,7 @@ import mermaid from 'mermaid';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-preview',
@@ -19,6 +20,8 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
 
   mermaidCode: string = '';
   mermaidHtml: SafeHtml = '';
+
+  nombreBase: string = '';  // para ingresar el nombre de la BD
   private mermaidInitialized = false;
 
   // Estado del modal
@@ -95,14 +98,56 @@ export class PreviewComponent implements OnInit, AfterViewChecked {
       .subscribe((res) => (this.sqlScript = res));
   }
 
+  // ejecutarSql() {
+  //   this.diagramService
+  //     .ejecutarSql(this.entidades, this.relaciones)
+  //     .subscribe((res) => {
+  //       alert('SQL ejecutado en SQL Server');
+  //       this.sqlScript = res.script;
+  //     });
+  // }
+
   ejecutarSql() {
+    if (!this.nombreBase) {
+      alert('Debe ingresar un nombre para la base de datos');
+      return;
+    }
+
     this.diagramService
-      .ejecutarSql(this.entidades, this.relaciones)
+      .ejecutarSql(this.entidades, this.relaciones, this.nombreBase)
       .subscribe((res) => {
         alert('SQL ejecutado en SQL Server');
         this.sqlScript = res.script;
       });
   }
+
+  crearBaseDatos() {
+  if (!this.nombreBase) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Atención',
+      text: 'Debe ingresar un nombre para la base de datos',
+    });
+    return;
+  }
+
+  this.diagramService.crearBaseDatos(this.nombreBase).subscribe({
+    next: (res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Base creada',
+        text: res.mensaje,
+      });
+    },
+    error: (err) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al crear la base: ' + err.message,
+      });
+    }
+  });
+}
 
 
   exportarSql() {

@@ -384,3 +384,59 @@ pre {
   max-width: 100%;  /* evita que se desborde */
   height: auto;
 }
+
+
+
+/* Contenedor de input + botón */
+.db-input {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+  max-width: 500px;
+}
+
+/* Input */
+.db-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.db-input input:focus {
+  border-color: #2980b9; /* azul al enfocar */
+  box-shadow: 0 0 4px rgba(41, 128, 185, 0.4);
+}
+
+/* Botón */
+.btn-db {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+.btn-db:hover {
+  background: linear-gradient(135deg, #1c5980, #2471a3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-db:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+.titulo-BD {
+    color: #2c3e50;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 10px;
+  }

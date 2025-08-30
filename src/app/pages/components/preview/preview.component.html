@@ -1,6 +1,16 @@
+<h3 class="titulo-BD">BASE DE DATO:</h3>
+<!-- Nombre de la base -->
+<div class="db-input">
+  <input type="text" [(ngModel)]="nombreBase" placeholder="Nombre de la base de datos" />
+  <button class="btn-db" (click)="crearBaseDatos()">Crear DB</button>
+</div>
+
+
 <!-- Componentes hijos -->
 <app-entidades (entidadesChange)="actualizarEntidades($event)"></app-entidades>
 <app-relaciones [entidades]="entidades" (relacionesChange)="actualizarRelaciones($event)"></app-relaciones>
+
+
 
 <!-- Botones -->
 <div class="actions">
@@ -12,6 +22,7 @@
 <h3>SQL Generado</h3>
 <pre>{{ sqlScript }}</pre>
 <button class="btn-export" (click)="exportarSql()">Descargar SQL</button>
+
 <!-- Diagrama ER (preview directo en la página) -->
 <h3>Diagrama ER</h3>
 <div class="diagram-container">
